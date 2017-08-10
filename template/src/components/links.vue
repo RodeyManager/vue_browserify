@@ -5,16 +5,17 @@
         <a href="https://github.com/RodeyManager/gupack.git" target="_blank" class="fa fa-github">GitHub</a>
         <transition name="fade">
             <ul class="case" v-show="showCase">
-                <li><a href="">ES6 + jQuery</a></li>
-                <li><a href="">ES6 + Vue + Browserify</a></li>
-                <li><a href="">ES6 + React + Browserify</a></li>
-                <li><a href="">ES6 + Angular + Browserify</a></li>
+                <li><a href="https://github.com/RodeyManager/gupack_simple" target="_blank">ES6 + jQuery</a></li>
+                <li><a href="https://github.com/RodeyManager/vue_browserify" target="_blank">ES6 + Vue + Browserify</a></li>
+                <li><a href="https://github.com/RodeyManager/react_browserify" target="_blank">ES6 + React + Browserify</a></li>
+                <li><a href="https://github.com/RodeyManager/angular_browserify" target="_blank">ES6 + Angular + Browserify</a></li>
             </ul>
         </transition>
     </div>
 </template>
 
 <script>
+
     export default {
         name: 'links',
         data () {
