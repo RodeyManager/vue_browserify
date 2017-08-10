@@ -9,6 +9,7 @@ const
     babelify     = require('babelify'),
     vueify       = require('vueify'),
     extractCss   = require('vueify/plugins/extract-css'),
+    uglifyify    = require('uglifyify'),
     env          = require('./config/app-env');
 
 const
@@ -94,17 +95,25 @@ module.exports      =  {
                 vfs.src(this.src).pipe(mps( (file, next) => {
                     let info = path.parse(file.path);
                     let dist = path.resolve(this.dest, '../', path.relative(this.sourceDir, info.dir));
-                    browserify({ debug: !env.isIf })
+                    let bw = browserify({ debug: !env.isIf })
                         .add(file.path)
                         .external(['vue', 'jquery', 'axios'])
                         .transform(vueify)
                         .transform(babelify.configure({ presets: ['es2015', 'es2016', 'stage-2'] }))
                         .plugin(extractCss, {
                             out: path.join(this.buildDir, 'assets/css/components.min.css')
-                        })
-                        .bundle()
-                        .pipe(sourceStream(info.base))
-                        .pipe(vfs.dest(dist));
+                        });
+
+                    if(env.isProduction){
+                        bw = bw.transform(uglifyify, {
+                            global: true,
+                            sourceMap: false
+                        });
+                    }
+
+                    bw.bundle()
+                    .pipe(sourceStream(info.base))
+                    .pipe(vfs.dest(dist));
                 } ));
 
                 return this.stream;

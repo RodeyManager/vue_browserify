@@ -2,7 +2,7 @@
 
 const API = require('./api');
 
-const ENV = 'local';
+const ENV = 'prd';
 const protocolReg = /^(https?:)?\/\//i;
 let time = ENV === 'local' || ENV === 'dev' ? 5 : 60;
 let debug = ENV !== 'prd';

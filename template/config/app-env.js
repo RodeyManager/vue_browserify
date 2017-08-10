@@ -16,7 +16,7 @@ const
 (() => {
     let appPath = './src/config/app-config.js';
     let appCfgContent = fs.readFileSync(appPath, 'UTF8');
-    appCfgContent = appCfgContent.replace(/\{\{env\}\}/i, env);
+    appCfgContent = appCfgContent.replace(/ENV\s*=\s*('|")[^'"]+?('|");?/i, `ENV = '${env}';`);
     fs.writeFileSync(appPath, appCfgContent, 'UTF8');
 })();
 
