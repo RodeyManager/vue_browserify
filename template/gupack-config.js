@@ -1,9 +1,7 @@
 'use strict';
 
 const
-    util         = require('util'),
     path         = require('path'),
-    fs           = require('fs'),
     browserify   = require('browserify'),
     vfs          = require('vinyl-fs'),
     mps          = require('map-stream'),
@@ -47,7 +45,10 @@ module.exports      =  {
         // ---说明：单个任务配置
         'build.css': {
             // 源文件
-            src: 'assets/css/**/*',
+            src: [
+                'assets/css/reset.css',
+                'assets/css/**/*'
+            ],
             // 额外的插件样式，如果不是每个页面都用到，不建议合并到主样式文件中
             // 可以单独在使用到的页面中引用
             plugins: [],
@@ -58,34 +59,6 @@ module.exports      =  {
             loader: cssLoaders('app.min.css'),
             // 监听变化（文件改变执行该任务）
             watch: ['assets/css/**/*']
-        },
-
-        // 'build.modules': {
-        //     src: ['modules/**/*'],
-        //     //过滤掉不进行编译的文件或目录
-        //     filters: [
-        //         'modules/model.js',
-        //         'modules/view.js',
-        //         'modules/main.js'
-        //     ],
-        //     dest: 'modules',
-        //     loader: jsLoaders(),
-        //     watch: [ 'modules/**/*']
-        // },
-
-        'build.app.js': {
-            src: [
-                env.configPath,
-                'config/app-api.js',
-                'modules/main.js',
-                'modules/model.js',
-                'modules/view.js'
-            ],
-            dest: 'modules',
-            loader: util._extend({
-                'gulp-concat': 'app.js',
-                'gulp-babel': gulpBabel()
-            }, jsLoaders())
         },
 
         'build.assets': {
@@ -100,8 +73,6 @@ module.exports      =  {
             filters: [],
             rely: [
                 'build.css',
-                'build.app.js',
-                // 'build.modules',
                 'build.jsViews'
             ],
             dest: 'views',
@@ -117,7 +88,7 @@ module.exports      =  {
             src: 'modules/**/*View.js',
             dest: 'modules',
             //依赖task列表
-            rely: ['build.assets', 'build.app.js'],
+            rely: ['build.assets'],
             loader: function(done){
                 // console.log(this);
                 vfs.src(this.src).pipe(mps( (file, next) => {
@@ -138,7 +109,8 @@ module.exports      =  {
 
                 return this.stream;
 
-            }
+            },
+            watch: [ 'assets/js/**/*', 'components/**/*', 'modules/**/*', 'config/**/*' ]
         }
 
     },
