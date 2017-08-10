@@ -99,7 +99,10 @@ module.exports      =  {
                         .add(file.path)
                         .external(['vue', 'jquery', 'axios'])
                         .transform(vueify)
-                        .transform(babelify.configure({ presets: ['es2015', 'es2016', 'stage-2'] }))
+                        .transform(babelify.configure({
+                            presets: ['es2015', 'es2016', 'stage-2'],
+                            compact: true
+                        }))
                         .plugin(extractCss, {
                             out: path.join(this.buildDir, 'assets/css/components.min.css')
                         });
@@ -181,13 +184,4 @@ function recache(path){
         toBase64Limit: 1000,
         basePath: path
     }
-}
-
-function gulpBabel(){
-    return {
-        presets: [ 'es2015', 'es2015', 'stage-2' ],
-        plugins: [
-            'transform-remove-strict-mode'
-        ]
-    };
 }
