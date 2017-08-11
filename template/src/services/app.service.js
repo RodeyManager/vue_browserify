@@ -1,3 +1,4 @@
+'use strict';
 
 const App = require('../config/app-config');
 
@@ -59,4 +60,3 @@ class AppService{
 }
 
 module.exports = AppService.getInstance();
-

@@ -97,7 +97,7 @@ module.exports      =  {
                     let dist = path.resolve(this.dest, '../', path.relative(this.sourceDir, info.dir));
                     let bw = browserify({ debug: !env.isIf })
                         .add(file.path)
-                        .external(['vue', 'jquery', 'axios'])
+                        .external(['vue', 'axios'])
                         .transform(vueify)
                         .transform(babelify.configure({
                             presets: ['es2015', 'es2016', 'stage-2'],

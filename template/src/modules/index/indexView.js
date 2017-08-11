@@ -1,7 +1,7 @@
 'use strict';
 
 const Hello = require('../../components/hello.vue');
-const AppService = require('../model');
+const AppService = require('../../services/app.service');
 
 new Vue({
     el: '#hello',
