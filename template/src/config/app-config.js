@@ -2,6 +2,7 @@
 
 const API = require('./api');
 
+// 当前编译环境 ../../config/app-env.js
 const ENV = 'local';
 const protocolReg = /^(https?:)?\/\//i;
 let time = ENV === 'local' || ENV === 'dev' ? 5 : 60;
