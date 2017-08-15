@@ -90,13 +90,7 @@ module.exports      =  {
 
                     debug: !env.isIf,
                     external: ['vue', 'axios'],
-                    transform: [
-                        vueify,
-                        [babelify,  {
-                            presets: ['es2015', 'es2016', 'stage-1'],
-                            compact: true
-                        }],
-                    ],
+                    transform: [ vueify, babelify ],
                     plugin: [
                         [ extractCss, {
                             out: path.join(env.dest.path, 'assets/css/components.min.css')
