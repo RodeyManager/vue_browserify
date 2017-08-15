@@ -59,4 +59,4 @@ class AppService{
 
 }
 
-module.exports = AppService.getInstance();
+export default AppService.getInstance();

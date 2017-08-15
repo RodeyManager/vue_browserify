@@ -102,7 +102,7 @@ module.exports      =  {
                     preserveComments: '!'
                 }
             },
-            watch: [ 'assets/js/**/*', 'components/**/*', 'modules/**/*', 'config/**/*' ]
+            watch: [ 'assets/js/**/*', 'components/**/*', 'modules/**/*', 'config/**/*', 'services/**/*' ]
         }
 
     },
