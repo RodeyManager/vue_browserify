@@ -7,7 +7,8 @@
     "build:dev": "gupack build -e dev",
     "build:stg": "gupack build -e stg",
     "build:prd": "gupack build -e prd",
-    "server": "gupack build -s"
+    "server": "gupack build -s",
+    "test": "gupack test"
   },
   "author": "",
   "license": "MIT",

@@ -11,7 +11,7 @@ const
 
     // 当前编译环境: local: 本地开发环境(mock data); dev: 开发环境(默认); stg: 测试环境; prd: 生成环境
     env = argv[_ei + 1] || 'local',
-    dist = argv[_di + 1] || '../build';
+    dist = argv[_di + 1] || 'build';
 
 (() => {
     let appPath = './src/config/app-config.js';
@@ -32,7 +32,7 @@ module.exports = {
     dest: {
         name: dist,
         index: _di,
-        path: path.isAbsolute(dist) ? dist : path.resolve(__dirname, dist)
+        path: path.isAbsolute(dist) ? dist : path.resolve(__dirname, '../', dist)
     },
     source: {
         path: path.resolve(__dirname, '../src')
