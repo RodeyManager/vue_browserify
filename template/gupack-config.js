@@ -64,11 +64,23 @@ module.exports      =  {
             loader: jsLoaders()
         },
 
+        'build.libs': {
+            src: [
+                path.resolve(__dirname, 'node_modules/axios/dist/axios.min.js'),
+                path.resolve(__dirname, 'node_modules/vue/dist/vue.min.js')
+            ],
+            dest: 'assets/js',
+            loader: Object.assign({
+                'gulp-concat': 'libs.js'
+            }, jsLoaders())
+        },
+
         'build.views': {
             src: ['views/**/*.html'],
             filters: [],
             rely: [
                 'build.css',
+                'build.libs',
                 'build.modules.views'
             ],
             dest: 'views',
@@ -87,9 +99,7 @@ module.exports      =  {
             rely: ['build.assets'],
             loader: {
                 'gulp-browserify-multi-entry': {
-
                     debug: !env.isIf,
-                    external: ['vue', 'axios'],
                     transform: [ vueify, babelify ],
                     plugin: [
                         [ extractCss, {

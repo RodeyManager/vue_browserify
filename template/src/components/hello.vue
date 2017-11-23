@@ -14,7 +14,7 @@
         name: 'hello',
         data () {
             return {
-                message: 'Hello world!'
+                message: 'Hello world!!!'
             }
         },
         components: {
